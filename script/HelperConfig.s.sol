@@ -49,6 +49,11 @@ contract HelperConfig is Script {
     }
 
     function getAnvilEthConfig() public returns (NetworkConfig memory) {
+        // fix: return the activeNetworkConfig if it's already set
+        if (activeNetworkConfig.priceFeed != address(0)) {
+            return activeNetworkConfig;
+        }
+
         // Deploy the mocks
         // Return the mock addresses
 
