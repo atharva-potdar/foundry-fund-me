@@ -2,16 +2,17 @@
 pragma solidity ^0.8.24 <0.9.0;
 
 import {Test, console} from "forge-std/Test.sol";
-
 import {FundMe} from "../src/FundMe.sol";
+import {DeployFundMe} from "../script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
+    DeployFundMe deployFundMe = new DeployFundMe();
 
-    // We call FundMeTest, which in turn deploys FundMe
-    // Therefore, the true owner of FundMe is this contract
+    // We call FundMeTest, which in turn calls DeployFundMe, which deploys FundMe
+    // No explanation, but the correct owner is now msg.sender in the tests
     function setUp() public {
-        fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+        fundMe = deployFundMe.run();
         console.log("FundMe deployed at:", address(fundMe));
     }
 
@@ -20,7 +21,7 @@ contract FundMeTest is Test {
     }
 
     function testOwnerIsSender() public view {
-        assertEq(fundMe.iOwner(), address(this));
+        assertEq(fundMe.iOwner(), msg.sender);
     }
 
     function testPriceFeedVersion() public view {
@@ -37,6 +38,6 @@ contract FundMeTest is Test {
         // We should make sure we have good unit and integration tests before relying on forked tests
 
         uint256 version = fundMe.getVersion();
-        assertEq(version, 4);
+        assertEq(version, deployFundMe.currentChainlinkContractVersion());
     }
 }

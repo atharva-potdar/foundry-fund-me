@@ -3,11 +3,20 @@ pragma solidity ^0.8.24 <0.9.0;
 
 import {Script} from "forge-std/Script.sol";
 import {FundMe} from "../src/FundMe.sol";
+import {HelperConfig} from "./HelperConfig.s.sol";
 
 contract DeployFundMe is Script {
-    function run() external {
+    uint256 public currentChainlinkContractVersion;
+
+    function run() external returns (FundMe) {
+        HelperConfig helperConfig = new HelperConfig();
+        (address priceFeed, uint256 chainlinkContractVersion) = helperConfig.activeNetworkConfig();
+
+        currentChainlinkContractVersion = chainlinkContractVersion;
+
         vm.startBroadcast();
-        FundMe fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+        FundMe fundMe = new FundMe(priceFeed);
         vm.stopBroadcast();
+        return fundMe;
     }
 }
