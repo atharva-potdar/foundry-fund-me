@@ -14,6 +14,7 @@ contract DeployFundMe is Script {
 
         currentChainlinkContractVersion = chainlinkContractVersion;
 
+        // This changes caller to msg.sender
         vm.startBroadcast();
         FundMe fundMe = new FundMe(priceFeed);
         vm.stopBroadcast();
