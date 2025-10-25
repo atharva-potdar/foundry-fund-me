@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-v3.0
 pragma solidity ^0.8.24 <0.9.0;
 
-import {AggregatorV3Interface} from
-    "chainlink-brownie-contracts/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+import {
+    AggregatorV3Interface
+} from "chainlink-brownie-contracts/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 // Why is this a library and not abstract?
 // Why not an interface?
