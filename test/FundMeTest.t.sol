@@ -6,7 +6,6 @@ import {Test, console} from "forge-std/Test.sol";
 import {FundMe} from "../src/FundMe.sol";
 
 contract FundMeTest is Test {
-
     FundMe fundMe;
 
     // We call FundMeTest, which in turn deploys FundMe
