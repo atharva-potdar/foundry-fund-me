@@ -24,9 +24,9 @@ contract FundMeTest is Test {
     function testGetSepoliaETHConfig() public {
         vm.chainId(11155111);
         HelperConfig sepoliaHelper = new HelperConfig();
-        
+
         (address priceFeed, uint256 version) = sepoliaHelper.activeNetworkConfig();
-        
+
         assertEq(priceFeed, 0x694AA1769357215DE4FAC081bf1f309aDC325306);
         assertEq(version, 4);
     }
@@ -34,9 +34,9 @@ contract FundMeTest is Test {
     function testGetMainnetCeloConfig() public {
         vm.chainId(42220);
         HelperConfig celoHelper = new HelperConfig();
-        
+
         (address priceFeed, uint256 version) = celoHelper.activeNetworkConfig();
-        
+
         assertEq(priceFeed, 0x0568fD19986748cEfF3301e55c0eb1E729E0Ab7e);
         assertEq(version, 4);
     }
@@ -44,9 +44,9 @@ contract FundMeTest is Test {
     function testGetMainnetETHConfig() public {
         vm.chainId(1);
         HelperConfig ethHelper = new HelperConfig();
-        
+
         (address priceFeed, uint256 version) = ethHelper.activeNetworkConfig();
-        
+
         assertEq(priceFeed, 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
         assertEq(version, 6);
     }
@@ -61,7 +61,7 @@ contract FundMeTest is Test {
 
     function testReceiveFunctionCallToFundMe() public {
         vm.prank(user);
-        (bool success, ) = address(fundMe).call{value: 1e18}("");
+        (bool success,) = address(fundMe).call{value: 1e18}("");
         assertTrue(success);
         assertEq(fundMe.getFunder(0), user);
         assertEq(fundMe.getAddressToAmountFunded(user), 1e18);
@@ -69,12 +69,11 @@ contract FundMeTest is Test {
 
     function testFallbackFunctionCallToFundMe() public {
         vm.prank(user);
-        (bool success, ) = address(fundMe).call{value: 1e18}("data wooo");
+        (bool success,) = address(fundMe).call{value: 1e18}("data wooo");
         assertTrue(success);
         assertEq(fundMe.getFunder(0), user);
         assertEq(fundMe.getAddressToAmountFunded(user), 1e18);
     }
-
 
     // EvmError: Revert! Why? We're making a call to an external contract in a test environment
 
@@ -124,10 +123,7 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
 
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
     function testWithdrawWithMultipleFunders() public {
@@ -146,10 +142,7 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
 
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
     modifier funded() {
