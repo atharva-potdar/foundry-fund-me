@@ -11,7 +11,7 @@ contract FundMeTest is Test {
     // We call FundMeTest, which in turn deploys FundMe
     // Therefore, the true owner of FundMe is this contract
     function setUp() public {
-        fundMe = new FundMe();
+        fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         console.log("FundMe deployed at:", address(fundMe));
     }
 
