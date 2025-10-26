@@ -2,10 +2,11 @@
 cache/
 out/
 
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
+# Deployed contract information
+broadcast/
+
+# Libraries
+lib/
 
 # Docs
 docs/

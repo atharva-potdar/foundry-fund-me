@@ -1,6 +1,6 @@
 -include .env
 
-.PHONY: all clean remove install update build test format deploy-sepolia
+.PHONY: all clean remove install update build test format deploy-sepolia fund-sepolia withdraw-sepolia
 
 # Thank you Cyfrin!
 all: clean remove install update build test format
@@ -22,3 +22,9 @@ format :; forge fmt
 
 deploy-sepolia:
 	forge script script/DeployFundMe.s.sol:DeployFundMe --rpc-url $(ETH_SP_RPC_URL) --account metamaskKey --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvvv
+
+fund-sepolia:
+	forge script script/Interactions.s.sol:FundFundMe --rpc-url $(ETH_SP_RPC_URL) --account metamaskKey --broadcast -vvvvv
+
+withdraw-sepolia:
+	forge script script/Interactions.s.sol:WithdrawFundMe --rpc-url $(ETH_SP_RPC_URL) --account metamaskKey --broadcast -vvvvv
