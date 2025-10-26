@@ -20,17 +20,17 @@ contract HelperConfig is Script {
 
     constructor() {
         if (block.chainid == 11155111) {
-            activeNetworkConfig = getSepoliaETHConfig();
+            activeNetworkConfig = getSepoliaEthConfig();
         } else if (block.chainid == 42220) {
             activeNetworkConfig = getMainnetCeloConfig();
         } else if (block.chainid == 1) {
-            activeNetworkConfig = getMainnetETHConfig();
+            activeNetworkConfig = getMainnetEthConfig();
         } else {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
     }
 
-    function getSepoliaETHConfig() public pure returns (NetworkConfig memory) {
+    function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
         NetworkConfig memory sepoliaConfig =
             NetworkConfig({priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306, chainlinkContractVersion: 4});
         return sepoliaConfig;
@@ -42,7 +42,7 @@ contract HelperConfig is Script {
         return mainnetCeloConfig;
     }
 
-    function getMainnetETHConfig() public pure returns (NetworkConfig memory) {
+    function getMainnetEthConfig() public pure returns (NetworkConfig memory) {
         NetworkConfig memory mainnetEthConfig =
             NetworkConfig({priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419, chainlinkContractVersion: 6});
         return mainnetEthConfig;

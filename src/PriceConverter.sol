@@ -14,6 +14,9 @@ library PriceConverter {
         // https://docs.chain.link/data-feeds/price-feeds/addresses
         (, int256 answer,,,) = priceFeed.latestRoundData();
         // ETH/USD rate in 18 digit
+
+        // casting to 'uint256' is safe because prices can't be negative
+        // forge-lint: disable-next-line(unsafe-typecast)
         return uint256(answer * 10000000000);
     }
 

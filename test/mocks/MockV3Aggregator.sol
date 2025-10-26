@@ -62,10 +62,14 @@ contract MockV3Aggregator is AggregatorV3Interface {
         returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)
     {
         return (
+            // casting to 'uint80' is safe because id cannot be negative
+            // forge-lint: disable-next-line(unsafe-typecast)
             uint80(latestRound),
             getAnswer[latestRound],
             getStartedAt[latestRound],
             getTimestamp[latestRound],
+            // casting to 'uint80' is safe because price cannot be negative
+            // forge-lint: disable-next-line(unsafe-typecast)
             uint80(latestRound)
         );
     }

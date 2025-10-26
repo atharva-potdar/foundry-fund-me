@@ -2,9 +2,9 @@
 pragma solidity ^0.8.24 <0.9.0;
 
 import {Test, console} from "forge-std/Test.sol";
-import {FundMe} from "../src/FundMe.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
-import {HelperConfig} from "../script/HelperConfig.s.sol";
+import {FundMe} from "../../src/FundMe.sol";
+import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
+import {HelperConfig} from "../../script/HelperConfig.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
@@ -17,7 +17,7 @@ contract FundMeTest is Test {
     // No explanation, but the correct owner is now msg.sender in the tests
     function setUp() public {
         fundMe = deployFundMe.run();
-        console.log("FundMe deployed at:", address(fundMe));
+        console.log("FundMe deployed at: %s", address(fundMe));
         vm.deal(user, 1e5 ether);
     }
 
@@ -126,7 +126,7 @@ contract FundMeTest is Test {
         assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
-    function testWithdrawWithMultipleFunders() public {
+    function testWithdrawWithMultipleFunders() public funded {
         uint160 numberOfFunders = 10;
         uint160 startingFunderIndex = 1;
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
