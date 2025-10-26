@@ -1,6 +1,6 @@
 -include .env
 
-.PHONY: build deploy-sepolia
+.PHONY: all clean remove install update build test format deploy-sepolia
 
 # Thank you Cyfrin!
 all: clean remove install update build test format
@@ -11,13 +11,13 @@ remove :; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gi
 
 install :; forge install cyfrin/foundry-devops && forge install smartcontractkit/chainlink-brownie-contracts && forge install foundry-rs/forge-std
 
-update:; forge update
+update :; forge update
 
-build:; forge build
+build :; forge build
 
-test:; forge test
+test :; forge test
 
-format:; forge fmt
+format :; forge fmt
 # Thank you Cyfrin!
 
 deploy-sepolia:
