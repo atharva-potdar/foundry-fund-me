@@ -3,7 +3,7 @@
 .PHONY: build deploy-sepolia
 
 # Thank you Cyfrin!
-all: clean remove install update build test
+all: clean remove install update build test format
 
 clean  :; forge clean
 
@@ -15,7 +15,9 @@ update:; forge update
 
 build:; forge build
 
-forge:; forge test
+test:; forge test
+
+format:; forge fmt
 # Thank you Cyfrin!
 
 deploy-sepolia:
