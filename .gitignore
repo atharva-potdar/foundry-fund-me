@@ -6,7 +6,7 @@ out/
 broadcast/
 
 # Libraries
-lib/
+# lib/
 
 # Docs
 docs/
