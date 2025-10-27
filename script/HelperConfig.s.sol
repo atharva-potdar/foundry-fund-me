@@ -25,6 +25,8 @@ contract HelperConfig is Script {
             activeNetworkConfig = getMainnetCeloConfig();
         } else if (block.chainid == 1) {
             activeNetworkConfig = getMainnetEthConfig();
+        } else if (block.chainid == 421614) {
+            activeNetworkConfig = getSepoliaArbitrumConfig();
         } else {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
@@ -46,6 +48,12 @@ contract HelperConfig is Script {
         NetworkConfig memory mainnetEthConfig =
             NetworkConfig({priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419, chainlinkContractVersion: 6});
         return mainnetEthConfig;
+    }
+
+    function getSepoliaArbitrumConfig() public pure returns (NetworkConfig memory) {
+        NetworkConfig memory sepoliaArbitrumConfig =
+            NetworkConfig({priceFeed: 0xd30e2101a97dcbAeBCBC04F14C3f624E67A35165, chainlinkContractVersion: 4});
+        return sepoliaArbitrumConfig;
     }
 
     function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
